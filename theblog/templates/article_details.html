@@ -4,7 +4,7 @@
 {% block content %}
 
 <h1>{{ post.title }}</h1>
-    <small>By:
+<small>By:
     {{ post.author.first_name }}
     {{ post.author.last_name }} - 
     {{ post.post_date }} 
@@ -14,15 +14,19 @@
     <a href="{% url 'delete_post' post.pk %}"> (Delete) </a>
     
     
-    </small><br/>
+</small><br/>
 <hr>
 <br/>
+
+{{ post.body|safe }}
 
 {% if post.header_image %}
     <img src="{{ post.header_image.url }}" width="300" height="300" >
 {% else %}
     <!-- Display some default image or nothing at all -->
 {% endif %}
+
+<br/> <br/>
 
 {% if post.header_video %}
     <video width="320" height="240" controls>
@@ -31,9 +35,13 @@
     </video>
 {% endif %}
 
+<br/> <br/>
+
 {% for image in post.header_images.all %}
     <img src="{{ image.url }}" width="300" height="300" >
-{% endfor %}
+    {% endfor %}
+
+    <br/> <br/><br/> <br/>
 
 {% for video in post.header_videos.all %}
     <video width="320" height="240" controls>
@@ -42,7 +50,6 @@
     </video>
 {% endfor %}
 
-{{ post.body|safe }}
 
 <br/><br/>
 <a href="{% url 'home' %}" class="btn btn-primary" >Back</a>

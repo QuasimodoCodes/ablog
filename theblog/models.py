@@ -6,14 +6,14 @@ from django.utils.html import mark_safe
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
-    header_image = models.ImageField(null=True, blank=True, upload_to="images/")
     title_tag = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
     post_date = models.DateTimeField(auto_now_add=True)
     snippet = models.CharField(max_length=255, default='Click link above to see full post')
-    header_video = models.FileField(null=True, blank=True, upload_to="videos/")
-
+    header_image = models.ImageField(upload_to='path/to/images/', blank=True, null=True)
+    header_video = models.FileField(upload_to='path/to/videos/', blank=True, null=True)
+    
     def __str__(self):
         return f'{self.title} | {self.author}'
 
